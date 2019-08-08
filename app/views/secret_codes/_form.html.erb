@@ -1,0 +1,12 @@
+<%= simple_form_for(@secret_code) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+  	<%= f.input :secret_code %>
+    <%= f.association :user,:collection => @unassociated_users, label_method: :email,:include_blank => true,:value_method => :id, selected: @secret_code.user_id %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+  </div>
+<% end %>

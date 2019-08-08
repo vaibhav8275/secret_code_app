@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GenerateSecretTokenApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+    <div class="container">
+      <h1><%= link_to 'Task Tracker', root_path, :class=>'navbar-brand' %></h1>
+      <!-- Navbar content -->
+      
+      <ul class="navbar navbar-nav float-left">
+        <% if current_user %>
+          <li class="nav-item">
+            <%= link_to 'Secret Codes', secret_codes_path, :class=>'nav-link' if can? :index, SecretCode %>
+          </li>
+          
+        <% end %>
+
+      </ul>
+      
+      <ul class="navbar float-right">
+        <%= render 'devise/menu/registration_items' %>
+        <%= render 'devise/menu/login_items' %>
+      </ul>
+    </div>
+  </nav>
+
+    <div id="content" class="container">
+      <% flash.each do |key, value| %>
+       <%= raw "<div class='row'><div class='col'><div class=\"alert alert-#{ key }\"> #{value} </div></div></div>" %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

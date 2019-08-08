@@ -1,0 +1,5 @@
+{
+  "name": "generate_secret_token_app",
+  "private": true,
+  "dependencies": {}
+}
